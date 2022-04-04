@@ -1,24 +1,4 @@
-# vue-todo
+Vue-Practice-Intermediate
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+👩‍💻 현재, 인프런 Vue.js 로드맵을 따라
+학습중 입니다.
