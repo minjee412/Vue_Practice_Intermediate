@@ -2,7 +2,7 @@
   <div class="inputBox shadow">
       <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo"> 
       <!-- v-on:keyup.enter 는 enter를 눌렀을때 동작하는 메서드 설정 -->
-      
+
       <!-- <button v-on:click="addTodo">add</button> -->
       <span class="addContainer"  v-on:click="addTodo">
           <i class="fa-solid fa-plus addBtn"></i>
@@ -20,11 +20,12 @@ export default {
 
     methods:{
         addTodo: function(){
-            // console.log(this.newTodoItem);
+            if(this.newTodoItem !== ''){
+                // this.$emit('이벤트이름', 인자1, 인자2...);
+                this.$emit('addTodoItem', this.newTodoItem);
 
-            // localstorage에 저장하는 로직
-            localStorage.setItem(this.newTodoItem, this.newTodoItem); //localStorage.setItem(key, value); 
-            this.clearInput();
+                this.clearInput();
+            }
         },
         clearInput: function(){
             this.newTodoItem='';
