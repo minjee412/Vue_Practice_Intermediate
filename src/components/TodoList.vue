@@ -1,6 +1,6 @@
 <template>
   <div>
-      <ul>
+      <transition-group name='list' tag = 'ul'>     
             <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
                 <i class="fa-solid fa-check checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
                     v-on:click="toggleComplete(todoItem, index)"></i>
@@ -10,7 +10,7 @@
                 </span>
               
             </li>
-      </ul>
+      </transition-group>
   </div>
 </template>
 
@@ -50,6 +50,12 @@ export default {
         border-radius: 5px;
     }
 
+    .removeBtn {
+        margin-left: auto;
+        color: #de4343;
+        cursor: pointer;
+    }
+
     .checkBtn {
         line-height: 45px;
         color: #62acde;
@@ -65,9 +71,18 @@ export default {
         color: #b3adad;
     }
 
-    .removeBtn {
-        margin-left: auto;
-        color: #de4343;
-        cursor: pointer;
+    /* 리스트 아이템 트랜지션 효과 */
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .list-enter-active, .list-leave-active {
+        transition: all 1s
+    }
+
+    .list-enter, .list-leave-to {
+        opacity: 0;
+        transform: translateY(38px);
     }
 </style>

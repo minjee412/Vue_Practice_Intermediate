@@ -10,7 +10,7 @@
 export default {
   methods: {
     clearTodo: function(){
-      localStorage.clear();
+      this.$emit('clearAll');
     }
   }
 
@@ -25,6 +25,7 @@ export default {
   background-color: white;
   border-radius: 5px;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .clearAllBtn {

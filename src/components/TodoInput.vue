@@ -7,14 +7,30 @@
       <span class="addContainer"  v-on:click="addTodo">
           <i class="fa-solid fa-plus addBtn"></i>
       </span>
+
+      <ModuleModal v-if="showModal" @close="showModal = false">
+        <h3 slot="header">
+            경고 
+            <i class="closeModalBtn fa fa-times" 
+            aria-hidden="true" 
+            @click="showModal = false">
+            </i>
+        </h3>
+        <p slot="body">아무것도 입력하지 않으셨습니다.</p>
+        <p slot="footer">copy right</p>
+      </ModuleModal>
+
   </div>
 </template>
 
 <script>
+import ModuleModal from './common/ModuleModal.vue'
+
 export default {
     data:function(){
         return{
-            newTodoItem: ""
+            newTodoItem: "",
+            showModal: false
         }
     },
 
@@ -25,11 +41,16 @@ export default {
                 this.$emit('addTodoItem', this.newTodoItem);
 
                 this.clearInput();
+            } else {
+                this.showModal = !this.showModal
             }
         },
         clearInput: function(){
             this.newTodoItem='';
         }
+    },
+    components:{
+        ModuleModal: ModuleModal
     }
 }
 </script>
