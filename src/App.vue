@@ -21,14 +21,14 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
-  data: function(){
+  data(){
     return{
       todoItems:[]
     }
   },
   
   methods: {
-    addOneItem: function(todoItem){
+    addOneItem(todoItem){
       var obj = {completed : false, item: todoItem};
                 
       // localstorage에 저장하는 로직
@@ -37,11 +37,11 @@ export default {
 
       this.todoItems.push(obj);
     },
-    removeOneItem: function(todoItem, index){
+    removeOneItem(todoItem, index){
       localStorage.removeItem(todoItem.item); // localStorage 상으로 삭제 시키는 기능
       this.todoItems.splice(index, 1); // 화면단(Javascript)에서 localStorage에 삭제된 부분 반영 하는 기능
     },
-    toggleOneItem: function(todoItem, index){
+    toggleOneItem(todoItem, index){
       // todoItem.completed = !todoItem.completed;
       this.todoItems[index].completed = !this.todoItems[index].completed
 
@@ -49,14 +49,14 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     },
-    clearAllItems: function(){
+    clearAllItems(){
       localStorage.clear();
       this.todoItems = [];
     }
   },
 
   // created : vue lifecycle 중 하나로, 인스턴스가 생성되면 바로 호출됨
-  created: function(){
+  created(){
     if(localStorage.length > 0){
       for(var i = 0; i < localStorage.length; i++){
           // console.log(JSON.parse (localStorage.getItem(localStorage.key(i))));
@@ -68,10 +68,10 @@ export default {
 
 components:{
     // 컴포넌트태그명 : 컴포넌트내용
-    'TodoHeader' : TodoHeader,
-    'TodoInput' : TodoInput,
-    'TodoList' : TodoList,
-    'TodoFooter' : TodoFooter    
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter    
   }
 }
 </script>

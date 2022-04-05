@@ -19,12 +19,12 @@ export default {
     props:['propsdata'],
 
     methods:{
-        removeTodo: function(todoItem, index){
+        removeTodo(todoItem, index){
             this.$emit('removeItem', todoItem, index); 
             // console.log(todoItem, index); //object가 들어옴 (이렇게 되면 정삭 작동않함)    
         },
 
-        toggleComplete: function(todoItem, index){
+        toggleComplete(todoItem, index){
             this.$emit('toggleItem', todoItem, index)
         }
     }
