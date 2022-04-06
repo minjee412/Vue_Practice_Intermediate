@@ -1,15 +1,25 @@
 <template>
   <div>
-      <transition-group name='list' tag = 'ul'>     
+      <transition-group name='list' tag = 'ul'>
+
+        <!-- 기존: <li v-for="(todoItem, index) in propsdata" class="shadow" v-bind:key="todoItem.item"> -->
+        <!-- propsdata로 내려받던 todoItems가 store.js로 옮겨 갔기 때문에, scope에 맞춰서 this.$store.state.todoItems로 변경 -->
             <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+                <!-- 🔹 v-for=("작명 in 몇번:key="작명") 으로 사용한다. -->
+                <!-- 🔹 작명:(value,key,index) 순이고 순서가 중요하고 이름은 중요하지 않다 ,몇번: data로도 사용 가능 하다. -->
                 <i class="fa-solid fa-check checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
                     v-on:click="toggleComplete(todoItem, index)"></i>
-                <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
+                
+                <span v-bind:class="{textCompleted: todoItem.completed}">
+                    {{todoItem.item}}
+                </span>
+                
                 <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                     <i class="fa-solid fa-trash-can"></i>
                 </span>
-              
+
             </li>
+
       </transition-group>
   </div>
 </template>
@@ -20,9 +30,19 @@ export default {
     methods:{
         removeTodo(todoItem, index){
             // this.$emit('removeItem', todoItem, index); 
-            // console.log(todoItem, index); //object가 들어옴 (이렇게 되면 정삭 작동않함)    
-          
+            console.log(todoItem,index);    // 🍥 {__ob__: Observer} 0
+                                            // completed: false
+                                            // item: "30" >> 🍖 todoItem.item을 찍으면, 해당 값인 30이 나온다. 🍖
+                                            // __ob__: Observer {value: {…}, dep: Dep, vmCount: 0}
+                                            // get completed: ƒ reactiveGetter()
+                                            // set completed: ƒ reactiveSetter(newVal)
+                                            // get item: ƒ reactiveGetter()
+                                            // set item: ƒ reactiveSetter(newVal)
+                                            // 🍥 [[Prototype]]: Object 
+        
+        // 🍖 인자 2개를 한꺼번에 날릴때는, 그 2개를 객체로 만들어서 넘긴다. 🍖
             this.$store.commit('removeOneItem', {todoItem, index})
+         // this.$store.commit('mutaion메세드이름', 넘겨줄인자)
         },
 
         toggleComplete(todoItem, index){
