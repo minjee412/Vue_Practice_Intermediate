@@ -1,20 +1,22 @@
 <template>
   <div class="clearAllContainer">
-      <span class="clearAllBtn" v-on:click="clearTodo">
-        Clear All
-      </span>
+    <span class="clearAllBtn" v-on:click="clearTodo"> Clear All </span>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   methods: {
-    clearTodo(){
-      this.$store.commit('clearAllItems')
-    }
-  }
-
-}
+    // clearTodo(){
+    //   this.$store.commit('clearAllItems')
+    // }
+    ...mapGetters({
+      clearTodo: "removeOneItem",
+    }),
+  },
+};
 </script>
 
 <style scoped>
@@ -32,5 +34,4 @@ export default {
   color: #e20303;
   display: block;
 }
-
 </style>
