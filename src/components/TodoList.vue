@@ -1,15 +1,15 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <!-- 기존: <li v-for="(todoItem, index) in propsdata" class="shadow" v-bind:key="todoItem.item"> -->
-      <!-- propsdata로 내려받던 todoItems가 store.js로 옮겨 갔기 때문에, scope에 맞춰서 this.$store.state.todoItems로 변경 -->
-      <!-- 🍱<li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">🍱 -->
-      <!-- 🔹 v-for=("작명 in 몇번:key="작명") 으로 사용한다. -->
-      <!-- 🔹 작명:(value,key,index) 순이고 순서가 중요하고 이름은 중요하지 않다 ,몇번: data로도 사용 가능 하다. -->
-      <!-- ⏬ -->
-      <!-- 🍱<li v-for="(todoItem, index) in this.$store.getters.storedTodoItems" v-bind:key="todoItem.item" class="shadow">🍱 -->
-      <!-- 🍥 store.js에 helper함수인 getters를 선언함에 따라 받아오는 데이터값의 경로(?)를 수정 🍥 -->
-      <!-- ⏬ -->
+        <!-- 기존: <li v-for="(todoItem, index) in propsdata" class="shadow" v-bind:key="todoItem.item"> -->
+        <!-- propsdata로 내려받던 todoItems가 store.js로 옮겨 갔기 때문에, scope에 맞춰서 this.$store.state.todoItems로 변경 -->
+        <!-- 🍱<li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">🍱 -->
+        <!-- 🔹 v-for=("작명 in 몇번:key="작명") 으로 사용한다. -->
+        <!-- 🔹 작명:(value,key,index) 순이고 순서가 중요하고 이름은 중요하지 않다 ,몇번: data로도 사용 가능 하다. -->
+                                              <!-- ⏬ -->
+        <!-- 🍱<li v-for="(todoItem, index) in this.$store.getters.storedTodoItems" v-bind:key="todoItem.item" class="shadow">🍱 -->
+        <!-- 🍥 store.js에 helper함수인 getters를 선언함에 따라 받아오는 데이터값의 경로(?)를 수정 🍥 -->
+                                              <!-- ⏬ -->
       <li
         v-for="(todoItem, index) in this.storedTodoItems"
         v-bind:key="todoItem.item"
@@ -67,7 +67,7 @@ export default {
     // (helper함수 적용)
     ...mapMutations({
       removeTodo: "removeOneItem",
-      // ----------- 의문사항 ! --------------
+      // --------------------------------- 의문사항 ! ------------------------------------
       // v-on:click="removeTodo(todoItem, index) 에서
       // todoItem, index 2개 인자를 넘겼는데 왜 mapMutations에서는 아무것도 넘기는게 없나 ?
       // map이 들어가는 helper 함수들은 인자를 선언하지 않아도, 호출하는단에서 인자가 있으면
@@ -76,6 +76,7 @@ export default {
       // 호출단에서는 removeTodo(todoItem, index) 2개로 되어있다.
       // 이럴때는 ( )안에 인자를 동일하게 { }로 묶어 하나로 만들어 준다.
       // removeTodo({todoItem, index})
+      // --------------------------------------------------------------------------------
       toggleComplete: "toggleOneItem",
     }),
   },
